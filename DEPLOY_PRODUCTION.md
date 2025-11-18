@@ -72,14 +72,23 @@ Hướng dẫn này sẽ giúp bạn deploy ứng dụng lên mạng để chia 
 
 #### 2.2. Cấu hình Backend trên Railway
 
-1. Railway sẽ tự động detect Spring Boot project
-2. **Settings** → **Root Directory**: Chọn `backend`
-3. **Settings** → **Build Command**: `./mvnw clean package -DskipTests` (Sử dụng Maven Wrapper)
-4. **Settings** → **Start Command**: `java -jar target/hr-backend-0.0.1-SNAPSHOT.jar`
+Railway sẽ tự động detect và build từ Dockerfile (đã được cấu hình trong `railway.json`).
+
+**Nếu Railway tự động detect:**
+- Railway sẽ đọc `railway.json` và dùng Dockerfile để build
+- Không cần cấu hình thêm
+
+**Nếu Railway không tự động detect:**
+1. **Settings** → **Root Directory**: Chọn `backend`
+2. **Settings** → **Builder**: Chọn `Dockerfile`
+3. **Settings** → **Dockerfile Path**: `Dockerfile` (nếu Root Directory là `backend`)
    
    **Lưu ý**: 
-   - File `railway.json` trong thư mục `backend` đã được cấu hình sẵn, Railway sẽ tự động đọc cấu hình từ đó
-   - Maven Wrapper (`mvnw`) đã được tạo sẵn trong project, không cần cài Maven thủ công
+   - File `railway.json` đã được cấu hình để dùng Dockerfile
+   - Dockerfile đã được cấu hình với Maven Wrapper (`mvnw`) và Java 21
+   - Nếu Railway vẫn dùng Nixpacks, bạn có thể cập nhật Settings thủ công:
+     - **Build Command**: `./mvnw clean package -DskipTests`
+     - **Start Command**: `java -jar target/hr-backend-0.0.1-SNAPSHOT.jar`
 
 #### 2.3. Cấu hình Environment Variables
 
