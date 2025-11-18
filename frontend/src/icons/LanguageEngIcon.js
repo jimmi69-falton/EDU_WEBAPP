@@ -1,4 +1,4 @@
-const React = require("react");
+import React from "react";
 
 function LanguageEngIcon({ title, titleId, ...props }, svgRef) {
   return /*#__PURE__*/ React.createElement(
@@ -33,4 +33,4 @@ function LanguageEngIcon({ title, titleId, ...props }, svgRef) {
 }
 
 const ForwardRef = /*#__PURE__*/ React.forwardRef(LanguageEngIcon);
-module.exports = ForwardRef;
+export default ForwardRef;
