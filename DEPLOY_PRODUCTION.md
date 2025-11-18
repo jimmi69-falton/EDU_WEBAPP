@@ -74,8 +74,10 @@ Hướng dẫn này sẽ giúp bạn deploy ứng dụng lên mạng để chia 
 
 1. Railway sẽ tự động detect Spring Boot project
 2. **Settings** → **Root Directory**: Chọn `backend`
-3. **Settings** → **Build Command**: `./mvnw clean package -DskipTests` (hoặc `mvn clean package -DskipTests`)
+3. **Settings** → **Build Command**: `mvn clean package -DskipTests` (Railway sẽ tự động cài Maven)
 4. **Settings** → **Start Command**: `java -jar target/hr-backend-0.0.1-SNAPSHOT.jar`
+   
+   **Lưu ý**: Nếu bạn có file `railway.json` trong thư mục `backend`, Railway sẽ tự động đọc cấu hình từ đó, không cần set thủ công.
 
 #### 2.3. Cấu hình Environment Variables
 
@@ -254,17 +256,26 @@ Mở **Developer Tools** (F12) → **Console** và kiểm tra:
 
 ### Backend không start
 
-1. **Kiểm tra logs trên Railway/Render**:
+1. **Lỗi `./mvnw: not found`**:
+   - **Nguyên nhân**: File Maven Wrapper (`mvnw`) không tồn tại trong project
+   - **Giải pháp**: 
+     - Sử dụng `mvn` thay vì `./mvnw` trong build command
+     - Railway/Render sẽ tự động cài Maven khi detect Spring Boot project
+     - File `railway.json` đã được cập nhật để dùng `mvn` thay vì `./mvnw`
+     - Nếu deploy trên Railway, đảm bảo **Build Command** là: `mvn clean package -DskipTests`
+
+2. **Kiểm tra logs trên Railway/Render**:
    - Xem có lỗi database connection không
    - Xem có lỗi port không (Railway/Render tự động set PORT)
 
-2. **Kiểm tra Environment Variables**:
+3. **Kiểm tra Environment Variables**:
    - Đảm bảo tất cả biến đã được set đúng
    - Kiểm tra JWT_SECRET không rỗng
 
-3. **Kiểm tra Build Command**:
+4. **Kiểm tra Build Command**:
    - Đảm bảo Maven build thành công
    - Kiểm tra JAR file được tạo ra
+   - Nếu dùng Railway, file `railway.json` sẽ tự động được đọc
 
 ### Frontend không kết nối được Backend
 
