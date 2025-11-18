@@ -110,6 +110,8 @@ release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
+# Note: mvnw, mvnw.cmd, and .mvn/wrapper/maven-wrapper.properties should be committed
+# Only ignore the jar file
 .mvn/wrapper/maven-wrapper.jar
 
 # Uploads
