@@ -1,27 +1,36 @@
 # 🔧 Hướng dẫn sửa lỗi Railway Deployment
 
 ## Vấn đề
-Railway vẫn đang dùng build command cũ `mvn clean package -DskipTests` thay vì `./mvnw`.
+Railway báo lỗi `Dockerfile does not exist` hoặc không tìm thấy Dockerfile.
 
 ## Giải pháp
 
-### Option 1: Dùng Dockerfile (Khuyến nghị - Đã cấu hình sẵn)
+### ⚠️ QUAN TRỌNG: Cấu hình Root Directory trên Railway
 
-File `railway.json` đã được cập nhật để dùng Dockerfile. Railway sẽ tự động detect và build từ Dockerfile.
+**Bước 1**: Trên Railway Dashboard:
+1. Vào **Settings** của service backend
+2. **QUAN TRỌNG**: Set **Root Directory** là `backend` (không để trống!)
+3. **Builder**: Chọn `Dockerfile`
+4. **Dockerfile Path**: `Dockerfile` (vì Root Directory đã là `backend`)
 
-**Bước 1**: Commit và push code:
+**Bước 2**: Commit và push code:
 ```bash
 git add backend/railway.json backend/Dockerfile
 git commit -m "Configure Railway to use Dockerfile"
 git push
 ```
 
-**Bước 2**: Trên Railway Dashboard:
-1. Vào **Settings** của service
-2. Đảm bảo **Root Directory** là `backend`
-3. **Builder** sẽ tự động là `Dockerfile` (nếu Railway đọc được `railway.json`)
-4. Nếu không, chọn **Builder** → **Dockerfile**
-5. **Dockerfile Path**: `backend/Dockerfile` (hoặc `Dockerfile` nếu Root Directory đã là `backend`)
+### Option 2: Nếu Railway build từ root (không set Root Directory)
+
+Nếu Railway build từ root của repo, bạn có 2 lựa chọn:
+
+**A. Dùng Dockerfile ở root** (đã tạo sẵn `Dockerfile.backend`):
+1. Đổi tên `Dockerfile.backend` thành `Dockerfile` ở root
+2. Hoặc set **Dockerfile Path** là `Dockerfile.backend`
+
+**B. Hoặc set Root Directory trên Railway** (Khuyến nghị):
+1. Vào Settings → **Root Directory**: `backend`
+2. **Dockerfile Path**: `Dockerfile`
 
 ### Option 2: Cập nhật Settings thủ công
 
