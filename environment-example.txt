@@ -1,0 +1,24 @@
+# Database Configuration
+DB_HOST=localhost
+DB_PORT=3306
+DB_NAME=hr_management
+DB_USERNAME=root
+DB_PASSWORD=password
+
+# JWT Configuration
+JWT_SECRET=mySecretKey123456789012345678901234567890
+JWT_EXPIRATION=86400000
+
+# Gemini AI Configuration
+GEMINI_API_KEY=your_gemini_api_key_here
+
+# Frontend Configuration
+REACT_APP_API_URL=http://localhost:8080/api
+
+# File Upload Configuration
+UPLOAD_DIR=./uploads/documents/
+MAX_FILE_SIZE=10MB
+
+# CORS Configuration
+CORS_ALLOWED_ORIGINS=http://localhost:3000
+

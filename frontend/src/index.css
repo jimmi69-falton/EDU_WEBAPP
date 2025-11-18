@@ -1,0 +1,637 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@import './styles/tokens.css';
+
+/* Google Font - Inter */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  background-size: cover;
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
+}
+
+/* Override background for light mode only */
+body:not(.theme-dark) {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  background-size: cover;
+}
+
+/* Specific overrides for main containers */
+body:not(.theme-dark) .min-h-screen {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  background-size: cover;
+}
+
+code {
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--glass-bg-tertiary);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--glass-border);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--glass-border-light);
+}
+
+/* Typography */
+.h1 {
+  font-size: 2rem;
+  line-height: 2.5rem;
+  font-weight: 800;
+  color: var(--neutral-800);
+}
+
+.h2 {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+  color: var(--neutral-800);
+}
+
+.h3 {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+  color: var(--neutral-800);
+}
+
+.subtitle {
+  color: var(--neutral-500);
+  font-size: 0.875rem;
+}
+
+/* Card Component */
+.card {
+  background: #FFFFFF;
+  border: 1px solid var(--neutral-200);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+}
+
+body.theme-dark .card {
+  background: var(--neutral-100);
+  border-color: var(--neutral-300);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+/* Button Styles */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary-600), var(--accent-600));
+  color: white;
+  box-shadow: 0 4px 6px -1px rgba(30, 136, 229, 0.3);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--primary-800), var(--accent-800));
+  box-shadow: 0 10px 15px -3px rgba(30, 136, 229, 0.4);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: var(--neutral-100);
+  color: var(--neutral-700);
+  border: 1px solid var(--neutral-200);
+}
+
+.btn-secondary:hover {
+  background: var(--neutral-200);
+}
+
+.btn-danger {
+  background: var(--status-danger);
+  color: white;
+}
+
+.btn-danger:hover {
+  background: #DC2626;
+}
+
+.btn-success {
+  background: var(--status-healthy);
+  color: white;
+}
+
+/* Input Styles */
+.input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--neutral-200);
+  background: #FFFFFF;
+  color: var(--neutral-800);
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+body.theme-dark .input {
+  background: var(--neutral-100);
+  border-color: var(--neutral-300);
+  color: var(--neutral-800);
+}
+
+.input::placeholder {
+  color: var(--neutral-400);
+}
+
+.input:focus {
+  border-color: var(--primary-600);
+  box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.1);
+}
+
+/* Select Styles */
+select.input {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748B'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1.25rem;
+  padding-right: 2.5rem;
+}
+
+/* Badge/Chip Styles */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.badge-healthy {
+  background: rgba(34, 197, 94, 0.1);
+  color: var(--status-healthy);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.badge-warning {
+  background: rgba(250, 204, 21, 0.1);
+  color: var(--status-warning);
+  border: 1px solid rgba(250, 204, 21, 0.3);
+}
+
+.badge-danger {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--status-danger);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.badge-info {
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--status-info);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.badge-neutral {
+  background: var(--neutral-100);
+  color: var(--neutral-600);
+  border: 1px solid var(--neutral-200);
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 50;
+}
+
+.modal-content {
+  background: #FFFFFF;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  border: 1px solid var(--neutral-200);
+}
+
+body.theme-dark .modal-content {
+  background: var(--neutral-100);
+  border-color: var(--neutral-300);
+}
+
+/* Sidebar & Nav */
+.sidebar {
+  background: #FFFFFF;
+  border-right: 1px solid var(--neutral-200);
+  box-shadow: var(--shadow-sm);
+}
+
+body.theme-dark .sidebar {
+  background: var(--neutral-100);
+  border-color: var(--neutral-300);
+}
+
+.topbar {
+  background: #FFFFFF;
+  border-bottom: 1px solid var(--neutral-200);
+  box-shadow: var(--shadow-sm);
+}
+
+body.theme-dark .topbar {
+  background: var(--neutral-100);
+  border-color: var(--neutral-300);
+}
+
+/* Animations */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, var(--neutral-100) 25%, var(--neutral-200) 50%, var(--neutral-100) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Utilities */
+.divider {
+  border-top: 1px solid var(--neutral-200);
+}
+
+body.theme-dark .divider {
+  border-color: var(--neutral-300);
+}
+
+.text-primary {
+  color: var(--primary-600);
+}
+
+.text-accent {
+  color: var(--accent-600);
+}
+
+.bg-primary {
+  background: var(--primary-600);
+}
+
+.bg-accent {
+  background: var(--accent-600);
+}
+
+/* Dark mode card overrides */
+body.theme-dark .card {
+  background: var(--glass-bg-primary);
+  border-color: var(--glass-border);
+}
+
+body.theme-dark .btn-secondary {
+  background: var(--glass-bg-secondary);
+  color: var(--text-primary);
+}
+
+/* Dark mode background */
+body.theme-dark {
+  background: linear-gradient(135deg, var(--neutral-50) 0%, var(--neutral-100) 100%);
+}
+
+/* Apple Glass Animations */
+@keyframes glass-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+.glass-pulse {
+  animation: glass-pulse 2s ease-in-out infinite;
+}
+
+@keyframes glass-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(0, 122, 255, 0.1); }
+  50% { box-shadow: 0 0 30px rgba(0, 122, 255, 0.2); }
+}
+
+.glass-glow {
+  animation: glass-glow 3s ease-in-out infinite;
+}
+
+/* Smooth transitions for all glass elements */
+.glass-card,
+.glass-button,
+.glass-input,
+.glass-sidebar,
+.glass-topbar,
+.glass-modal {
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hover effects for glass elements - Faster */
+.glass-card:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-glass-hover);
+  transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-button:hover {
+  transform: translateY(-0.5px);
+  box-shadow: var(--shadow-md);
+  transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Focus states for accessibility */
+.glass-input:focus {
+  outline: none;
+  border-color: var(--primary-500);
+  box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.1);
+}
+
+/* Glass shimmer effect */
+@keyframes glass-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.glass-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  background-size: 200% 100%;
+  animation: glass-shimmer 2s infinite;
+}
+
+/* Improved glass effect for better performance */
+.glass-card,
+.glass-button,
+.glass-input,
+.glass-sidebar,
+.glass-topbar,
+.glass-modal {
+  will-change: transform, box-shadow;
+  transform: translateZ(0);
+}
+
+/* Subtle glass effect for better readability */
+.glass-card {
+  backdrop-filter: var(--backdrop-blur);
+  -webkit-backdrop-filter: var(--backdrop-blur);
+}
+
+/* Dark mode glass improvements with blue shadows */
+body.theme-dark .glass-card {
+  background: var(--glass-bg-primary);
+  border-color: var(--glass-border);
+  box-shadow: var(--shadow-glass);
+}
+
+body.theme-dark .glass-button {
+  background: var(--gradient-glass);
+  border-color: var(--glass-border);
+  box-shadow: var(--shadow-sm);
+}
+
+body.theme-dark .glass-input {
+  background: var(--glass-bg-tertiary);
+  border-color: var(--glass-border);
+  box-shadow: var(--shadow-sm);
+}
+
+body.theme-dark .glass-sidebar {
+  box-shadow: var(--shadow-md);
+}
+
+body.theme-dark .glass-topbar {
+  box-shadow: var(--shadow-sm);
+}
+
+body.theme-dark .glass-modal {
+  box-shadow: var(--shadow-lg);
+}
+
+/* Reset shadows for non-glass elements */
+*:not(.glass-card):not(.glass-button):not(.glass-input):not(.glass-sidebar):not(.glass-topbar):not(.glass-modal) {
+  box-shadow: none;
+}
+
+/* Only glass components should have shadows */
+.glass-card {
+  box-shadow: var(--shadow-glass);
+}
+
+.glass-button {
+  box-shadow: var(--shadow-sm);
+}
+
+.glass-input {
+  box-shadow: var(--shadow-sm);
+}
+
+.glass-sidebar {
+  box-shadow: var(--shadow-md);
+}
+
+.glass-topbar {
+  box-shadow: var(--shadow-sm);
+}
+
+.glass-modal {
+  box-shadow: var(--shadow-lg);
+}
+
+/* Fix sidebar navigation text visibility */
+.glass-sidebar .glass-button.text-white {
+  color: white !important;
+}
+
+.glass-sidebar .glass-button.text-white * {
+  color: white !important;
+}
+
+.glass-sidebar .glass-button.text-white span {
+  color: white !important;
+}
+
+.glass-sidebar .glass-button.text-white svg {
+  color: white !important;
+}
+
+/* Ensure active nav items have white text */
+.glass-sidebar a[aria-current="page"] {
+  color: white !important;
+}
+
+.glass-sidebar a[aria-current="page"] * {
+  color: white !important;
+}
+
+.glass-sidebar a[aria-current="page"] span {
+  color: white !important;
+}
+
+.glass-sidebar a[aria-current="page"] svg {
+  color: white !important;
+}
+
+/* Override any conflicting text colors */
+.glass-sidebar .text-white {
+  color: white !important;
+}
+
+.glass-sidebar .text-white * {
+  color: white !important;
+}
+
+/* Force white text for active sidebar items */
+.glass-sidebar a.active,
+.glass-sidebar a[aria-current="page"],
+.glass-sidebar .glass-button.text-white {
+  color: white !important;
+}
+
+.glass-sidebar a.active *,
+.glass-sidebar a[aria-current="page"] *,
+.glass-sidebar .glass-button.text-white * {
+  color: white !important;
+}
+
+/* Specific overrides for sidebar text */
+.glass-sidebar .glass-button.text-white span,
+.glass-sidebar .glass-button.text-white svg,
+.glass-sidebar a.active span,
+.glass-sidebar a.active svg,
+.glass-sidebar a[aria-current="page"] span,
+.glass-sidebar a[aria-current="page"] svg {
+  color: white !important;
+}
+
+/* Force white text for all active sidebar elements */
+.glass-sidebar a[style*="color: white"] {
+  color: white !important;
+}
+
+.glass-sidebar a[style*="color: white"] * {
+  color: white !important;
+}
+
+.glass-sidebar a[style*="color: white"] span {
+  color: white !important;
+}
+
+.glass-sidebar a[style*="color: white"] svg {
+  color: white !important;
+}
+
+/* Override any Tailwind or CSS variables */
+.glass-sidebar .text-white,
+.glass-sidebar .text-white *,
+.glass-sidebar .text-white span,
+.glass-sidebar .text-white svg {
+  color: white !important;
+}
+
+/* Nuclear option - force white for any sidebar link with gradient background */
+.glass-sidebar a[class*="bg-gradient-to-r"] {
+  color: white !important;
+}
+
+.glass-sidebar a[class*="bg-gradient-to-r"] * {
+  color: white !important;
+}
+
+.glass-sidebar a[class*="bg-gradient-to-r"] span {
+  color: white !important;
+}
+
+.glass-sidebar a[class*="bg-gradient-to-r"] svg {
+  color: white !important;
+}
+
+/* Final override - force white text for any active sidebar item */
+.glass-sidebar nav a[class*="bg-gradient-to-r"],
+.glass-sidebar nav a[class*="bg-gradient-to-r"] *,
+.glass-sidebar nav a[class*="bg-gradient-to-r"] span,
+.glass-sidebar nav a[class*="bg-gradient-to-r"] svg,
+.glass-sidebar nav a[class*="text-white"],
+.glass-sidebar nav a[class*="text-white"] *,
+.glass-sidebar nav a[class*="text-white"] span,
+.glass-sidebar nav a[class*="text-white"] svg {
+  color: white !important;
+  fill: white !important;
+}
+
+/* Maximum specificity override */
+body .glass-sidebar nav a[class*="bg-gradient-to-r"],
+body .glass-sidebar nav a[class*="bg-gradient-to-r"] *,
+body .glass-sidebar nav a[class*="bg-gradient-to-r"] span,
+body .glass-sidebar nav a[class*="bg-gradient-to-r"] svg {
+  color: white !important;
+  fill: white !important;
+}
+
+/* Override CSS variables */
+body .glass-sidebar nav a[class*="bg-gradient-to-r"] {
+  --text-primary: white !important;
+  --text-secondary: white !important;
+  color: white !important;
+}
+
+body .glass-sidebar nav a[class*="bg-gradient-to-r"] * {
+  --text-primary: white !important;
+  --text-secondary: white !important;
+  color: white !important;
+}
+
+/* Light mode: ensure active sidebar items use dark text on light backgrounds */
+body:not(.theme-dark) .glass-sidebar a[aria-current="page"],
+body:not(.theme-dark) .glass-sidebar a[class*="bg-gradient-to-r"],
+body:not(.theme-dark) .glass-sidebar a[class*="text-white"] {
+  color: var(--text-primary) !important;
+}
+
+body:not(.theme-dark) .glass-sidebar a[aria-current="page"] *,
+body:not(.theme-dark) .glass-sidebar a[class*="bg-gradient-to-r"] *,
+body:not(.theme-dark) .glass-sidebar a[class*="text-white"] * {
+  color: var(--text-primary) !important;
+}
+
+body:not(.theme-dark) .glass-sidebar a[aria-current="page"] span,
+body:not(.theme-dark) .glass-sidebar a[aria-current="page"] svg,
+body:not(.theme-dark) .glass-sidebar a[class*="bg-gradient-to-r"] span,
+body:not(.theme-dark) .glass-sidebar a[class*="bg-gradient-to-r"] svg,
+body:not(.theme-dark) .glass-sidebar a[class*="text-white"] span,
+body:not(.theme-dark) .glass-sidebar a[class*="text-white"] svg {
+  color: var(--text-primary) !important;
+  fill: var(--text-primary) !important;
+}
